@@ -10,6 +10,7 @@ var mainDB = "localhost";
 var logDB = "localhostLogging";
 
 var builder = WebApplication.CreateBuilder(args);
+#region serilog
 
 //configure serilog 
 //does the same ass the commented code below 

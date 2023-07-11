@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain Layer", "Domain Layer", "{9C8274B9-6DC7-4984-B2A8-4D9C330507A3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Domain Layer", "01.Domain Layer", "{9C8274B9-6DC7-4984-B2A8-4D9C330507A3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastucture Layer", "infrastucture Layer", "{7DD7C028-4850-454F-BFBF-DC96014E5B97}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.infrastucture Layer", "03.infrastucture Layer", "{7DD7C028-4850-454F-BFBF-DC96014E5B97}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application Layer", "Application Layer", "{46E53E02-90D5-4192-99CC-46D642191C48}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Application Layer", "02.Application Layer", "{46E53E02-90D5-4192-99CC-46D642191C48}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation Layer", "Presentation Layer", "{9CF27CBE-0845-4DE3-AE31-7036AA0E3C11}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.Presentation Layer", "04.Presentation Layer", "{9CF27CBE-0845-4DE3-AE31-7036AA0E3C11}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{96B4D359-4821-4731-B403-9EFAF34741FD}"
 EndProject
@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "src\Domain Laye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure Layer\Infrastructure\Infrastructure.csproj", "{F281F3A3-AD84-40BD-B899-FC331B37FB13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application Layer\Application\Application.csproj", "{89A62E56-59BC-415A-9918-21A29393471E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application Layer\Application\Application.csproj", "{89A62E56-59BC-415A-9918-21A29393471E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryInterfaces", "src\Domain Layer\RepositoryInterfaces\RepositoryInterfaces.csproj", "{6C13D296-8F94-4F05-9AD8-8A602A3854B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryInterfaces", "src\Domain Layer\RepositoryInterfaces\RepositoryInterfaces.csproj", "{6C13D296-8F94-4F05-9AD8-8A602A3854B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "src\Infrastructure Layer\Logger\Logger.csproj", "{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{6C13D296-8F94-4F05-9AD8-8A602A3854B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C13D296-8F94-4F05-9AD8-8A602A3854B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C13D296-8F94-4F05-9AD8-8A602A3854B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{F281F3A3-AD84-40BD-B899-FC331B37FB13} = {7DD7C028-4850-454F-BFBF-DC96014E5B97}
 		{89A62E56-59BC-415A-9918-21A29393471E} = {46E53E02-90D5-4192-99CC-46D642191C48}
 		{6C13D296-8F94-4F05-9AD8-8A602A3854B7} = {9C8274B9-6DC7-4984-B2A8-4D9C330507A3}
+		{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC} = {7DD7C028-4850-454F-BFBF-DC96014E5B97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3606B3C-3E73-4B65-A160-8DB6B403F96A}

@@ -1,3 +1,5 @@
+using API.Helpers.EndpointDefinitionsHelpers;
+using Domain.Models;
 using Infrastructure.DependencyResolver;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddInfrastructure(builder.Configuration, "localhost");
+builder.Services.AddEndpointDefinitions(typeof(IEndpointDefinition));
 
 
 var app = builder.Build();
@@ -41,6 +44,16 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+/// mine
+/// 
+
+app.UseEndpointDefinitions();
+
+
+/// mine end
+/// 
+
 
 app.Run();
 

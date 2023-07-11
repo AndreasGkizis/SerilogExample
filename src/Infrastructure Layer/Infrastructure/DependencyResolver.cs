@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Database.DependencyResolver;
+using RepositoryInterfaces.Interfaces;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.DependencyResolver
 {
@@ -18,7 +20,7 @@ namespace Infrastructure.DependencyResolver
         {
             services.AddDatabaseContext(configuration, connectionStringName);
 
-            //services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IActionLogRepository, ActionLogRepository>();
             //services.AddTransient<ITeamRepository, TeamRepository>();
         }
     }

@@ -11,8 +11,14 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddInfrastructure(builder.Configuration, "localhost");
+
+///mine
+///
+
 builder.Services.AddEndpointDefinitions(typeof(IEndpointDefinition));
 
+///mine end
+///
 
 var app = builder.Build();
 

@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.GenericRepositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> 
+        where TEntity : class
     {
         private readonly LoggingDbContext _loggingDbContext;
 

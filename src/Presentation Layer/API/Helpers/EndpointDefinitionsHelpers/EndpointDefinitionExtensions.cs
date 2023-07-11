@@ -17,13 +17,7 @@
                     .Select(Activator.CreateInstance).Cast<IEndpointDefinition>()
                     );
             }
-
-            foreach (var endpoint in endpointDefinitions) 
-            
-            {
-                endpoint.DefineServices(services);
-            }
-
+                     
             services.AddSingleton(
                 endpointDefinitions as IReadOnlyCollection<IEndpointDefinition> 
                 );

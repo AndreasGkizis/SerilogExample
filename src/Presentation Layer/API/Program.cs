@@ -1,8 +1,30 @@
 using API.Helpers.EndpointDefinitionsHelpers;
 using Domain.Models;
 using Infrastructure.DependencyResolver;
+using Serilog;
+
+#region Variables
+
+// edit variables here to run under different configs
+var mainDB = "localhost";
+var logDB = "localhostLogging";
 
 var builder = WebApplication.CreateBuilder(args);
+
+//configure serilog 
+//does the same ass the commented code below 
+builder.AddLoggerConfig();
+
+//builder.Logging.ClearProviders();
+//var logger = new LoggerConfiguration()
+//    .MinimumLevel.Information()
+//    .ReadFrom.Configuration(builder.Configuration)
+//    .CreateLogger();
+
+//builder.Logging.AddSerilog(logger);
+#endregion
+
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -10,15 +32,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddInfrastructure(builder.Configuration, "localhost");
+builder.Services.AddInfrastructure(builder.Configuration, mainDB);
 
 ///mine
 ///
+
 
 builder.Services.AddEndpointDefinitions(typeof(IEndpointDefinition));
 
 ///mine end
 ///
+
+
+//Log.Logger = logger;
 
 var app = builder.Build();
 
@@ -30,26 +56,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
 
 /// mine
 /// 
@@ -63,7 +69,3 @@ app.UseEndpointDefinitions();
 
 app.Run();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

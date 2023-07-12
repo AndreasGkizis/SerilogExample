@@ -17,7 +17,7 @@ namespace Database.DependencyResolver
             string connectionStringName)
         {
 
-            services.AddDbContext<LoggingDbContext>
+            services.AddDbContext<ExampleDbContext>
             (options => options.
                 UseSqlServer(configuration.GetConnectionString(connectionStringName)));
             return services;

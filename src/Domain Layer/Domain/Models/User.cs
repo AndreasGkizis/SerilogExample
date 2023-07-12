@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public class LoginTrafficLog
+    public class User
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public DateOnly LastLogin { get; set; }
-        public DateOnly LastLogout { get; set; }
+        public string Name { get; set; }
+        public string Lastname { get; set; }
+        public string Email { get; set; }
+
     }
 }

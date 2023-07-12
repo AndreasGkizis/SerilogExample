@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class ActionLogRepository : GenericRepository<ActionLog>, IActionLogRepository
+    public class UserRepository 
+        : GenericRepository<User>, IUserRepository
     {
-        public ActionLogRepository(LoggingDbContext loggingDbContext) : base(loggingDbContext)
+        public UserRepository(ExampleDbContext exampleDbContext)
+            : base(exampleDbContext)
         {
         }
     }

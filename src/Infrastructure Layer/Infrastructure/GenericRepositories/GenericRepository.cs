@@ -12,11 +12,11 @@ namespace Infrastructure.GenericRepositories
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> 
         where TEntity : class
     {
-        private readonly LoggingDbContext _loggingDbContext;
+        private readonly ExampleDbContext _exampleDbContext;
 
-        public GenericRepository(LoggingDbContext loggingDbContext)
+        public GenericRepository(ExampleDbContext exampleDbContext)
         {
-            _loggingDbContext = loggingDbContext;
+            _exampleDbContext = exampleDbContext;
         }
 
 
@@ -24,7 +24,7 @@ namespace Infrastructure.GenericRepositories
         {
             try
             {
-                return await _loggingDbContext.Set<TEntity>().ToListAsync();
+                return await _exampleDbContext.Set<TEntity>().ToListAsync();
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace Infrastructure.GenericRepositories
         {
             try
             {
-                return await _loggingDbContext.Set<TEntity>().FindAsync(id);
+                return await _exampleDbContext.Set<TEntity>().FindAsync(id);
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace Infrastructure.GenericRepositories
         {
             try
             {
-                var result = await _loggingDbContext.Set<TEntity>().AddAsync(entity);
+                var result = await _exampleDbContext.Set<TEntity>().AddAsync(entity);
                 return result.Entity;
             }
             catch (Exception ex)

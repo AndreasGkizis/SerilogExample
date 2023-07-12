@@ -19,15 +19,21 @@ namespace Infrastructure.DependencyResolver
         public static void AddInfrastructure(
             this IServiceCollection services,
              IConfiguration configuration,
-            string connectionStringName)
+            string DBconnectionStringName
+            )
         {
-            services.AddDatabaseContext(configuration, connectionStringName);
-            services.AddTransient<IActionLogRepository, ActionLogRepository>();
+            services.AddDatabaseContext(configuration, DBconnectionStringName);
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
-        public static void AddLoggerConfig(this WebApplicationBuilder builder)
+        public static void AddLoggerConfig(
+            this WebApplicationBuilder builder, 
+            IConfiguration configuration,
+            string logDBConnecString
+            )
         {
-            builder.AddLoggerConfiguration();
+            
+            builder.AddLoggerConfiguration(configuration, logDBConnecString);
             // adds Serilog to the request pipeline 
             builder.Host.UseSerilog();
         }

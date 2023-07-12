@@ -9,23 +9,21 @@ using Serilog;
 var mainDB = "localhost";
 var logDB = "localhostLogging";
 
-var builder = WebApplication.CreateBuilder(args);
-#region serilog
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
 
-//configure serilog 
-//does the same ass the commented code below 
-builder.AddLoggerConfig();
 
-//builder.Logging.ClearProviders();
-//var logger = new LoggerConfiguration()
-//    .MinimumLevel.Information()
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .CreateLogger();
-
-//builder.Logging.AddSerilog(logger);
 #endregion
 
+var builder = WebApplication.CreateBuilder(args);
 
+#region Serilog
+
+builder.AddLoggerConfig(configuration, logDB);
+
+#endregion
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,19 +31,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+#region MINE
+
+// add all infrastructure layer
 builder.Services.AddInfrastructure(builder.Configuration, mainDB);
 
-///mine
-///
-
-
+// add all endpoints which implement IEndpointDefinition
 builder.Services.AddEndpointDefinitions(typeof(IEndpointDefinition));
 
-///mine end
-///
+#endregion
 
 
-//Log.Logger = logger;
+
 
 var app = builder.Build();
 
@@ -57,16 +54,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-/// mine
-/// 
-
+// perform the DefineEndpoints() for each class that implements IEndpointDefinition
+// which in turn does the MapGet, MapPost etc..
 app.UseEndpointDefinitions();
 
 
-/// mine end
-/// 
-
-
 app.Run();
-

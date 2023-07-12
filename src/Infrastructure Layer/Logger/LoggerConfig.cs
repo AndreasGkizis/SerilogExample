@@ -21,6 +21,7 @@ namespace Logger
         {
             var environment = configuration.GetValue<string>("Environment");
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var appName = Environment.GetEnvironmentVariable("APP_NAME");
 
             builder.Logging.ClearProviders();
 
@@ -29,6 +30,7 @@ namespace Logger
                 .ReadFrom.Configuration(builder.Configuration)
                 .Enrich.FromLogContext()
                 .Enrich.WithProperty("Environment", env)
+                .Enrich.WithProperty("Application", appName)
                 .WriteTo.MSSqlServer(
                     connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
                     sinkOptions:

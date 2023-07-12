@@ -19,19 +19,24 @@ namespace Logger
             string myConnectionString
             )
         {
+            var environment = configuration.GetValue<string>("Environment");
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
             builder.Logging.ClearProviders();
 
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .ReadFrom.Configuration(builder.Configuration)
+                .Enrich.FromLogContext()
+                .Enrich.WithProperty("Environment", env)
                 .WriteTo.MSSqlServer(
                     connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
                     sinkOptions:
                         new MSSqlServerSinkOptions { 
                             AutoCreateSqlDatabase = true,
                             AutoCreateSqlTable =true,
-                            TableName = configuration.GetSection($"Serilog:DatabaseConfig:TableName").Value,
-                            SchemaName = configuration.GetSection($"Serilog:DatabaseConfig:SchemaName").Value,
+                            TableName = configuration.GetSection($"Serilog:DatabaseConfig:TableName").Value
+                            //SchemaName = configuration.GetSection($"Serilog:DatabaseConfig:SchemaName").Value,
                         },
                     appConfiguration: configuration,
                     sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptions"),
@@ -41,7 +46,9 @@ namespace Logger
                 )
                 .CreateLogger();
 
-            builder.Logging.AddSerilog(logger);
+            //builder.Logging.AddSerilog(logger);
+
+            builder.Host.UseSerilog(logger);
 
             // this is needed to use anywhere in the app without dependency injecting 
             Log.Logger = logger;

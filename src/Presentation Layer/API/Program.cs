@@ -6,8 +6,10 @@ using Serilog;
 #region Variables
 
 // edit variables here to run under different configs
-var mainDB = "localhost";
-var logDB = "localhostLogging";
+// var mainDB = "localhost";
+// var logDB = "localhostLogging";
+var mainDB = "DockerLocalhostDB";
+var logDB = "LoggingDockerLocalhostDB";
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())

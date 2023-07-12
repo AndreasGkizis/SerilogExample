@@ -5,7 +5,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "APP_NAME": "SerilogExample"
+
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5286"
@@ -15,7 +17,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "APP_NAME": "SerilogExample"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7252;http://localhost:5286"
@@ -25,13 +28,20 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "APP_NAME": "SerilogExample"
+
       }
     },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "DockerDevelopment",
+        "APP_NAME": "DockerSerilogExample"
+
+      },
       "publishAllPorts": true,
       "useSSL": true
     }

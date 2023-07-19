@@ -18,7 +18,7 @@ namespace Infrastructure.DependencyResolver
     {
         public static void AddInfrastructure(
             this IServiceCollection services,
-             IConfiguration configuration,
+            IConfiguration configuration,
             string DBconnectionStringName
             )
         {

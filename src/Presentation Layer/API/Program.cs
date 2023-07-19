@@ -1,7 +1,5 @@
 using API.Helpers.EndpointDefinitionsHelpers;
-using Domain.Models;
 using Infrastructure.DependencyResolver;
-using Serilog;
 
 #region Variables
 
@@ -25,7 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region Serilog
 
-
+// gets its special section because it needs to sit on top of Host
 builder.AddLoggerConfig(configuration, logDB);
 
 #endregion
@@ -63,5 +61,10 @@ app.UseHttpsRedirection();
 // which in turn does the MapGet, MapPost etc..
 app.UseEndpointDefinitions();
 
+app.Logger.LogCritical("Critical");
+app.Logger.LogError("Error");
+app.Logger.LogWarning("Warning");
+app.Logger.LogInformation("Information");
+app.Logger.LogTrace("Trace");
 
 app.Run();

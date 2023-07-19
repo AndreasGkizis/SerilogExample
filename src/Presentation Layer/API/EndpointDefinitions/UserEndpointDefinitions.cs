@@ -20,7 +20,7 @@ namespace API.EndpointDefinitions
         {
             _logger.LogInformation("log information!!!!!!");
 
-            var allLogs = await repo.GetAllAsync();
+            // var allLogs = await repo.GetAllAsync();
             var fakeUsers = new List<Domain.Models.User>()
             {
                 new Domain.Models.User
@@ -44,7 +44,7 @@ namespace API.EndpointDefinitions
                     Lastname = "georgiou",
                     Email= "kwstas@gmail.com"
                 },
-              
+
             };
 
             return fakeUsers;

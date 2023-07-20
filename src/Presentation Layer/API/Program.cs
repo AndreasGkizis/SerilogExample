@@ -4,17 +4,29 @@ using Infrastructure.DependencyResolver;
 #region Variables
 
 // edit variables here to run under different configs
-var mainDB = "$localhost";
-var logDB = "$localhostLogging";
+var mainDB = "localhost";
+var logDB = "localhostLogging";
 //var mainDB = "DockerLocalhostDB";
 //var logDB = "LoggingDockerLocalhostDB";
 
-var configuration = new ConfigurationBuilder()
+var configurationBuilder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true, reloadOnChange: true)
-    .AddEnvironmentVariables()
-    .Build();
+    .AddEnvironmentVariables();
+
+var configuration= configurationBuilder.Build();
+
+var logConnectionString = configuration[$"ConnectionStrings:{logDB}"];
+
+configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+configuration[$"Serilog:WriteTo:8:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+configuration[$"Serilog:WriteTo:9:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+configuration[$"Serilog:WriteTo:10:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+//configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+//configuration[$"Serilog:WriteTo[]"] = bla;
+
+// i want to save the changes to appsettings.json and then use the new file for the web app
 
 
 #endregion

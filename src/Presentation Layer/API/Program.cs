@@ -1,5 +1,8 @@
 using API.Helpers.EndpointDefinitionsHelpers;
 using Infrastructure.DependencyResolver;
+using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 #region Variables
 
@@ -8,6 +11,22 @@ var mainDB = "localhost";
 var logDB = "localhostLogging";
 //var mainDB = "DockerLocalhostDB";
 //var logDB = "LoggingDockerLocalhostDB";
+
+var jsonpath = Directory.GetCurrentDirectory() + "\\appsettings.json";
+
+var jsoninsidetext = File.ReadAllText(jsonpath);
+
+var jsonformat = JsonSerializer.SerializeToDocument(jsoninsidetext);
+var jsonElement = JsonSerializer.SerializeToElement(jsoninsidetext);
+
+//jsonElement["12"];
+
+Debug.WriteLine(jsonformat);
+Debug.WriteLine(jsonformat.RootElement); // here this is all the insides of the document
+//Debug.WriteLine(jsonformat.RootElement["Serilog"]); 
+Debug.WriteLine(jsonformat.RootElement.ValueKind);
+Debug.WriteLine(jsonformat.RootElement.ValueKind.ToString());
+Debug.WriteLine(jsonformat);
 
 var configurationBuilder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())

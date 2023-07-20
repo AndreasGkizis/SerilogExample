@@ -5,11 +5,7 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Logger
 {
@@ -27,84 +23,87 @@ namespace Logger
             // clears any preexisting ILoggerProvider 
             builder.Logging.ClearProviders();
 
-            // customise the loggers used
+            Serilog.Debugging.SelfLog.Enable(msg => Debug.WriteLine(msg));
+
+
+            // customize the loggers used
             var logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration)
-                .Enrich.WithProperty("Environment", env)
-                // create conditional write to so that it writes every level to another table 
-                .WriteTo.Conditional(
-                    ev => ev.Level <= LogEventLevel.Fatal,
-                    wt => wt.MSSqlServer(
-                    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
-                    sinkOptions:
-                        new MSSqlServerSinkOptions
-                        {
-                            // this is the MINIMUM LEVEL
-                            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Fatal),
-                            AutoCreateSqlDatabase = true,
-                            AutoCreateSqlTable = true,
-                            TableName = "FatalLogs"
-                        },
-                    appConfiguration: configuration,
-                    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
-                    columnOptionsSection:
-                        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
-                        )
-                ).WriteTo.Conditional(
-                    ev => ev.Level <= LogEventLevel.Error,
-                    wt => wt.MSSqlServer(
-                    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
-                    sinkOptions:
-                        new MSSqlServerSinkOptions
-                        {
-                            // this is the MINIMUM LEVEL
-                            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Error),
-                            AutoCreateSqlDatabase = true,
-                            AutoCreateSqlTable = true,
-                            TableName = "ErrorLogs"
-                        },
-                    appConfiguration: configuration,
-                    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
-                    columnOptionsSection:
-                        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
-                )
-                ).WriteTo.Conditional(
-                    ev => ev.Level <= LogEventLevel.Warning,
-                    wt => wt.MSSqlServer(
-                    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
-                    sinkOptions:
-                        new MSSqlServerSinkOptions
-                        {
-                            // this is the MINIMUM LEVEL
-                            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Warning),
-                            AutoCreateSqlDatabase = true,
-                            AutoCreateSqlTable = true,
-                            TableName = "WarningLogs"
-                        },
-                    appConfiguration: configuration,
-                    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
-                    columnOptionsSection:
-                        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
-                )
-                ).WriteTo.Conditional(
-                    ev => ev.Level <= LogEventLevel.Information,
-                    wt => wt.MSSqlServer(
-                    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
-                    sinkOptions:
-                        new MSSqlServerSinkOptions
-                        {
-                            // this is the MINIMUM LEVEL
-                            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Information),
-                            AutoCreateSqlDatabase = true,
-                            AutoCreateSqlTable = true,
-                            TableName = "InformationLogs"
-                        },
-                    appConfiguration: configuration,
-                    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
-                    columnOptionsSection:
-                        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
-                )
-                )
+                //.Enrich.WithProperty("Environment", env)
+                //// create conditional write to so that it writes every level to another table 
+                //.WriteTo.Conditional(
+                //    ev => ev.Level <= LogEventLevel.Fatal,
+                //    wt => wt.MSSqlServer(
+                //    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
+                //    sinkOptions:
+                //        new MSSqlServerSinkOptions
+                //        {
+                //            // this is the MINIMUM LEVEL
+                //            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Fatal),
+                //            AutoCreateSqlDatabase = true,
+                //            AutoCreateSqlTable = true,
+                //            TableName = "FatalLogs"
+                //        },
+                //    appConfiguration: configuration,
+                //    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
+                //    columnOptionsSection:
+                //        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
+                //        )
+                //).WriteTo.Conditional(
+                //    ev => ev.Level <= LogEventLevel.Error,
+                //    wt => wt.MSSqlServer(
+                //    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
+                //    sinkOptions:
+                //        new MSSqlServerSinkOptions
+                //        {
+                //            // this is the MINIMUM LEVEL
+                //            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Error),
+                //            AutoCreateSqlDatabase = true,
+                //            AutoCreateSqlTable = true,
+                //            TableName = "ErrorLogs"
+                //        },
+                //    appConfiguration: configuration,
+                //    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
+                //    columnOptionsSection:
+                //        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
+                //)
+                //).WriteTo.Conditional(
+                //    ev => ev.Level <= LogEventLevel.Warning,
+                //    wt => wt.MSSqlServer(
+                //    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
+                //    sinkOptions:
+                //        new MSSqlServerSinkOptions
+                //        {
+                //            // this is the MINIMUM LEVEL
+                //            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Warning),
+                //            AutoCreateSqlDatabase = true,
+                //            AutoCreateSqlTable = true,
+                //            TableName = "WarningLogs"
+                //        },
+                //    appConfiguration: configuration,
+                //    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
+                //    columnOptionsSection:
+                //        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
+                //)
+                //).WriteTo.Conditional(
+                //    ev => ev.Level <= LogEventLevel.Information,
+                //    wt => wt.MSSqlServer(
+                //    connectionString: configuration.GetSection($"ConnectionStrings:{myConnectionString}").Value,
+                //    sinkOptions:
+                //        new MSSqlServerSinkOptions
+                //        {
+                //            // this is the MINIMUM LEVEL
+                //            LevelSwitch = new LoggingLevelSwitch(LogEventLevel.Information),
+                //            AutoCreateSqlDatabase = true,
+                //            AutoCreateSqlTable = true,
+                //            TableName = "InformationLogs"
+                //        },
+                //    appConfiguration: configuration,
+                //    sinkOptionsSection: configuration.GetSection("Serilog:DatabaseConfig:SinkOptionsSection"),
+                //    columnOptionsSection:
+                //        configuration.GetSection("Serilog:DatabaseConfig:ColumnOptions")
+                //)
+                //)
 
                 .CreateLogger();
 

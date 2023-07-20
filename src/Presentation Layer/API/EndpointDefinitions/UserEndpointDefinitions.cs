@@ -19,6 +19,7 @@ namespace API.EndpointDefinitions
             ILogger<UserEndpointDefinitions> _logger)
         {
             _logger.LogInformation("log information!!!!!!");
+            _logger.LogCritical("log Critical!!!!!!");
 
             // var allLogs = await repo.GetAllAsync();
             var fakeUsers = new List<Domain.Models.User>()

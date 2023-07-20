@@ -4,10 +4,10 @@ using Infrastructure.DependencyResolver;
 #region Variables
 
 // edit variables here to run under different configs
-// var mainDB = "localhost";
-// var logDB = "localhostLogging";
-var mainDB = "DockerLocalhostDB";
-var logDB = "LoggingDockerLocalhostDB";
+var mainDB = "$localhost";
+var logDB = "$localhostLogging";
+//var mainDB = "DockerLocalhostDB";
+//var logDB = "LoggingDockerLocalhostDB";
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -60,11 +60,14 @@ app.UseHttpsRedirection();
 // perform the DefineEndpoints() for each class that implements IEndpointDefinition
 // which in turn does the MapGet, MapPost etc..
 app.UseEndpointDefinitions();
+for (int i = 0; i < 10; i++)
+{
+    app.Logger.LogCritical("Critical");
+    app.Logger.LogError("Error");
+    app.Logger.LogWarning("Warning");
+    app.Logger.LogInformation("Information");
+    app.Logger.LogTrace("Trace");
 
-app.Logger.LogCritical("Critical");
-app.Logger.LogError("Error");
-app.Logger.LogWarning("Warning");
-app.Logger.LogInformation("Information");
-app.Logger.LogTrace("Trace");
+}
 
 app.Run();

@@ -28,12 +28,11 @@ namespace Infrastructure.DependencyResolver
 
         public static void AddLoggerConfig(
             this WebApplicationBuilder builder, 
-            IConfiguration configuration,
-            string logDBConnecString
+            IConfiguration configuration
             )
         {
             
-            builder.AddLoggerConfiguration(configuration, logDBConnecString);
+            builder.AddLoggerConfiguration(configuration);
             // adds Serilog to the request pipeline 
             builder.Host.UseSerilog();
         }

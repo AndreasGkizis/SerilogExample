@@ -13,8 +13,7 @@ namespace Logger
     {
         public static WebApplicationBuilder AddLoggerConfiguration(
             this WebApplicationBuilder builder,
-            IConfiguration configuration,
-            string myConnectionString
+            IConfiguration configuration
             )
         {
             var environment = configuration.GetValue<string>("Environment");

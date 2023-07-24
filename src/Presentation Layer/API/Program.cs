@@ -1,61 +1,50 @@
+using API.Helpers;
 using API.Helpers.EndpointDefinitionsHelpers;
 using Infrastructure.DependencyResolver;
-using System.Diagnostics;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 #region Variables
 
 // edit variables here to run under different configs
-var mainDB = "localhost";
-var logDB = "localhostLogging";
-//var mainDB = "DockerLocalhostDB";
-//var logDB = "LoggingDockerLocalhostDB";
+// var mainDB = "localhost";
+// var logDB = "localhostLogging";
+var mainDB = "DockerLocalhostDB";
+var logDB = "LoggingDockerLocalhostDB";
 
-var jsonpath = Directory.GetCurrentDirectory() + "\\appsettings.json";
+#endregion
 
-var jsoninsidetext = File.ReadAllText(jsonpath);
-
-var jsonformat = JsonSerializer.SerializeToDocument(jsoninsidetext);
-var jsonElement = JsonSerializer.SerializeToElement(jsoninsidetext);
-
-//jsonElement["12"];
-
-Debug.WriteLine(jsonformat);
-Debug.WriteLine(jsonformat.RootElement); // here this is all the insides of the document
-//Debug.WriteLine(jsonformat.RootElement["Serilog"]); 
-Debug.WriteLine(jsonformat.RootElement.ValueKind);
-Debug.WriteLine(jsonformat.RootElement.ValueKind.ToString());
-Debug.WriteLine(jsonformat);
+// Indicate the position of the connection string in appsettings.json
+// This will set the connection string for the logging Database
+SettingsHelpers.AddOrUpdateAppSettingLogging($"ConnectionStrings:{logDB}");
 
 var configurationBuilder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true, reloadOnChange: true)
+    .AddJsonFile(
+        Path.Combine(AppContext.BaseDirectory,
+        "appsettings.json"),
+        optional: false,
+        reloadOnChange: true)
     .AddEnvironmentVariables();
 
-var configuration= configurationBuilder.Build();
+var configuration = configurationBuilder.Build();
 
 var logConnectionString = configuration[$"ConnectionStrings:{logDB}"];
 
-configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-configuration[$"Serilog:WriteTo:8:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-configuration[$"Serilog:WriteTo:9:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-configuration[$"Serilog:WriteTo:10:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+// configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+// configuration[$"Serilog:WriteTo:8:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+// configuration[$"Serilog:WriteTo:9:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
+// configuration[$"Serilog:WriteTo:10:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
 //configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
 //configuration[$"Serilog:WriteTo[]"] = bla;
 
 // i want to save the changes to appsettings.json and then use the new file for the web app
 
 
-#endregion
-
 var builder = WebApplication.CreateBuilder(args);
 
 #region Serilog
 
 // gets its special section because it needs to sit on top of Host
-builder.AddLoggerConfig(configuration, logDB);
+builder.AddLoggerConfig(configuration);
 
 #endregion
 

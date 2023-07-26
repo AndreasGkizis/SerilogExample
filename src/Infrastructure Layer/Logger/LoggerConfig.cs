@@ -18,7 +18,6 @@ namespace Logger
             builder.Logging.ClearProviders();
 
             var logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
                 .ReadFrom.Configuration(builder.Configuration)
                 .CreateLogger();
 

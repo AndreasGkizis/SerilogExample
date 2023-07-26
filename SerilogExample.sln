@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Application Layer", "02.Application Layer", "{46E53E02-90D5-4192-99CC-46D642191C48}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.Presentation Layer", "04.Presentation Layer", "{9CF27CBE-0845-4DE3-AE31-7036AA0E3C11}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{96B4D359-4821-4731-B403-9EFAF34741FD}"
 EndProject
@@ -25,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryInterfaces", "src\Domain Layer\RepositoryInterfaces\RepositoryInterfaces.csproj", "{6C13D296-8F94-4F05-9AD8-8A602A3854B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "src\Infrastructure Layer\Logger\Logger.csproj", "{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "src\Infrastructure Layer\Logger\Logger.csproj", "{5DD52FE6-05DC-44CC-9E6A-4E8BC7A834BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

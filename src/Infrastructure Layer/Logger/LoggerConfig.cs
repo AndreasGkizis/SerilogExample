@@ -29,6 +29,10 @@ namespace Logger
             // customize the loggers used
             var logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration)
+                .CreateLogger();
+
+            #region class implemetation
+
                 //.Enrich.WithProperty("Environment", env)
                 //// create conditional write to so that it writes every level to another table 
                 //.WriteTo.Conditional(
@@ -105,7 +109,8 @@ namespace Logger
                 //)
                 //)
 
-                .CreateLogger();
+            #endregion
+
 
             //builder.Logging.AddSerilog(logger);
 

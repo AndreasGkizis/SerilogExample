@@ -7,10 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["SerilogExample/API.csproj", "API/"]
-RUN dotnet restore "SerilogExample/API.csproj"
+COPY ["/API.csproj", "SerilogExample/src/Presentation Layer/API/"]
+COPY ["../../Infrastructure Layer/Infrastructure/Infrastructure.csproj", "SerilogExample/src/Infrastructure Layer/Infrastructure/"]
+
+RUN dotnet restore "SerilogExample/src/Presentation Layer/API/API.csproj"
 COPY . .
-WORKDIR "/src/SerilogExample"
+WORKDIR "/SerilogExample/src/Presentation Layer/API"
 RUN dotnet build "API.csproj" -c Release -o /app/build
 
 FROM build AS publish

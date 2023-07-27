@@ -10,7 +10,11 @@ public static class SettingsHelpers
     {
         try
         {
-            var filePath = Path.Combine(AppContext.BaseDirectory, "appsettings.json");
+            //var apipath = GetPathForApi();
+
+            var filePath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "appsettings.json");
             string json = File.ReadAllText(filePath);
             //dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
 
@@ -24,7 +28,6 @@ public static class SettingsHelpers
             for (int i = 7; i < 11; i++)
             {
                 string sectionPathKey = $"Serilog:WriteTo[{i}]:Args:configureLogger:WriteTo[0]:Args:connectionString";
-                // configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
 
                 SetValueRecursively(sectionPathKey, jsonObj, connectionStringValue);
 
@@ -32,6 +35,8 @@ public static class SettingsHelpers
 
 
             string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+
+            File.Create(filePath).Close();
             File.WriteAllText(filePath, output);
         }
         catch (Exception ex)
@@ -87,7 +92,7 @@ public static class SettingsHelpers
                 var nextSection = remainingSections[1];
                 SetValueRecursively(nextSection, nextJsonObj, value);
             }
-            else 
+            else
             {
                 // We've got to the end of the tree, set the value!!
                 var test = jsonToken[sectionPathKey];
@@ -120,5 +125,20 @@ public static class SettingsHelpers
         var sections = section.Split("[", 2);
         name = sections[0];
 
+    }
+
+    private static string GetPathForApi()
+    {
+        // Get the current directory
+        string currentDirectory = Directory.GetCurrentDirectory();
+
+        // Move up three levels
+        for (int i = 0; i < 3; i++)
+        {
+            currentDirectory = Path.GetDirectoryName(currentDirectory);
+        }
+
+        // At this point, 'currentDirectory' will contain the path three levels up from the original current directory
+        return currentDirectory;
     }
 }

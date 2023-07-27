@@ -28,16 +28,6 @@ var configuration = configurationBuilder.Build();
 
 var logConnectionString = configuration[$"ConnectionStrings:{logDB}"];
 
-// configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-// configuration[$"Serilog:WriteTo:8:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-// configuration[$"Serilog:WriteTo:9:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-// configuration[$"Serilog:WriteTo:10:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-// configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
-// configuration[$"Serilog:WriteTo[]"] = bla;
-
-// i want to save the changes to appsettings.json and then use the new file for the web app
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 #region Serilog
@@ -76,17 +66,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 // perform the DefineEndpoints() for each class that implements IEndpointDefinition
 // which in turn does the MapGet, MapPost etc..
 app.UseEndpointDefinitions();
-for (int i = 0; i < 10; i++)
-{
-    app.Logger.LogCritical("Critical");
-    app.Logger.LogError("Error");
-    app.Logger.LogWarning("Warning");
-    app.Logger.LogInformation("Information");
-    app.Logger.LogTrace("Trace");
-
-}
 
 app.Run();

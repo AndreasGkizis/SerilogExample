@@ -9,20 +9,14 @@ using Serilog;
 var mainDB = "localhost";
 var logDB = "localhostLogging";
 
+#endregion
+
 var builder = WebApplication.CreateBuilder(args);
 #region serilog
 
 //configure serilog 
-//does the same ass the commented code below 
 builder.AddLoggerConfig();
 
-//builder.Logging.ClearProviders();
-//var logger = new LoggerConfiguration()
-//    .MinimumLevel.Information()
-//    .ReadFrom.Configuration(builder.Configuration)
-//    .CreateLogger();
-
-//builder.Logging.AddSerilog(logger);
 #endregion
 
 

@@ -1,17 +1,13 @@
-# Serilog Implementation in Minimal API project (C#)
+﻿# Serilog Implementation in Minimal API project (C#)
 ---
 
-### Introduction
+## Introduction
 
-This repository demonstrates a minimal API implementation in .NET 7  
-using Serilog for logging. The goal was to learn about logging in general since it is important to have a logger in place
-before proceeding to develop the full product in order to be able to watch over the application's behavior 
+This repository demonstrates a minimal API implementation in .NET 7 using [Serilog](https://serilog.net/) for logging. 
 
-## Project Goals
+The goal was to learn about logging in general in order to apply in later projects 
 
-Configure the Logger in many ways and with a logical separation which would be helpful when attempting to read through the logs 
-
-## Lessons learned ! 
+## Lessons learned  🕮
 There are two main ways to configure any logging framework 
  
 #### <u> Classes to set the configuration as needed </u>
@@ -34,7 +30,7 @@ The reason for this is that the program does not have to re-run for the changes 
 You can simply change something in the file and the changes are applied immediately to your logger (pretty cool if you ask me!).
 In production this has the obvious plus of zero downtime for any changes so this is the way I aimed to set up my configuration
 
-## Getting Started
+## &#127937; Getting Started &#127937;
 
 There are Several branches to this repository 
 1. [simple_debug_console_file_logging](https://github.com/AndreasGkizis/SerilogExample/tree/simple_debug_console_file_logging)
@@ -49,6 +45,18 @@ to log in tebales according to the log level making it easier to query them if n
 
 1. [simple_debug_console_file_logging]()
 
-    In this case I am attempting to dynamically edit the appsettings.json file before creating the logger.
+    Dymancally edit the appsettings.json file vie the program.cs file before creating the logger.
 This way the user of the program would need to enter the connection string only once and it would populate the file
+and use the new file to configure the loggers
 
+
+## Things I want to implement in the future  :crystal_ball:
+1. [ ] Docker Support for both the app and the database
+1. [ ] Improve the recursive functions to be more adaptive
+1. [ ] Add summaries to all functions
+
+
+
+### &#127882; Any Feedback is always welcome &#128170;
+
+&#10097; Feel free to contact me via my [LinkedIn Profile](https://www.linkedin.com/in/andreas-gkizis-a9ab29a5/)

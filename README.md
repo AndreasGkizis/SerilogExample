@@ -30,20 +30,20 @@ The reason for this is that the program does not have to re-run for the changes 
 You can simply change something in the file and the changes are applied immediately to your logger (pretty cool if you ask me!).
 In production this has the obvious plus of zero downtime for any changes so this is the way I aimed to set up my configuration
 
-## &#127937; Getting Started &#127937;
+## &#127937; Getting Started 
 
 There are Several branches to this repository 
 1. [simple_debug_console_file_logging](https://github.com/AndreasGkizis/SerilogExample/tree/simple_debug_console_file_logging)
 
     Has simple logs for writing in the Console, the Debug Console and a file in the program.cs level
-1. [placehoder_name]()
+1. [ using_appsettings.json_for_serilog]()
 
 
     Has Configuration for separate files depending on the log level and also uses MSSQL
 to log in tebales according to the log level making it easier to query them if needed
 
 
-1. [simple_debug_console_file_logging]()
+1. [dynamicappsettings]()
 
     Dymancally edit the appsettings.json file vie the program.cs file before creating the logger.
 This way the user of the program would need to enter the connection string only once and it would populate the file

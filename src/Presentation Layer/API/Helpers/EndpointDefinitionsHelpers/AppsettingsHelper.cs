@@ -1,6 +1,7 @@
 using Newtonsoft;
 using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Nodes;
 
 namespace API.Helpers;
 public static class SettingsHelpers
@@ -25,7 +26,7 @@ public static class SettingsHelpers
                 string sectionPathKey = $"Serilog:WriteTo[{i}]:Args:configureLogger:WriteTo[0]:Args:connectionString";
                 // configuration[$"Serilog:WriteTo:7:Args:configureLogger:WriteTo:0:Args:connectionString"] = logConnectionString;
 
-                SetValueRecursively(sectionPathKey, jsonToken, connectionStringValue);
+                SetValueRecursively(sectionPathKey, jsonObj, connectionStringValue);
 
             }
 
@@ -63,52 +64,36 @@ public static class SettingsHelpers
     {
         try
         {
-            var jsonObj = (JObject)jsonToken;
+            //var jsonObj = (JObject)jsonToken;
             // Split the string at the first ':' character
             var remainingSections = sectionPathKey.Split(":", 2);
             var currentSection = remainingSections[0];
 
-            if (IsArrayNotation(currentSection, out var arrayIndex))
-            {
-                GetArrayName(currentSection, out var arrayName);
-
-                var array = jsonObj[arrayName];
-
-                var arrayPositionObject = array[arrayIndex];
-
-                var nextSection = remainingSections[1];
-
-                SetValueRecursively(nextSection, arrayPositionObject, value);
-
-            }
-            else
-            {
-                jsonToken = jsonObj[currentSection];
-            }
+            JToken nextJsonObj;
 
             if (remainingSections.Length > 1)
             {
+                if (IsArrayNotation(currentSection, out var arrayIndex))
+                {
+                    GetArrayName(currentSection, out var arrayName);
+                    var arrayObj = jsonToken[arrayName];
+                    nextJsonObj = arrayObj[arrayIndex];
+                }
+                else
+                {
+                    nextJsonObj = jsonToken[currentSection];
+                }
+
                 var nextSection = remainingSections[1];
-                SetValueRecursively(nextSection, jsonToken, value);
+                SetValueRecursively(nextSection, nextJsonObj, value);
             }
-            else
+            else 
             {
                 // We've got to the end of the tree, set the value!!
-                if (jsonToken.Type == JTokenType.String)
-                {
-                    var propToChange = jsonToken.Parent as JProperty;
-                    propToChange.Value = value;
-                }
+                var test = jsonToken[sectionPathKey];
+                var propToChange = test.Parent as JProperty;
+                propToChange.Value = value;
             }
-
-            //else if (jsonToken.Type == JTokenType.Array)
-            //{
-            //    var jsonArray = (JArray)jsonToken;
-            //    foreach (var item in jsonArray)
-            //    {
-            //        SetValueRecursively(sectionPathKey, item, value);
-            //    }
-            //}
         }
         catch (Exception ex)
         {

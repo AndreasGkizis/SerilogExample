@@ -20,6 +20,13 @@ namespace API.EndpointDefinitions
         {
             _logger.LogInformation("log information!!!!!!");
 
+            _logger.LogTrace("-----------> LOG TRACE <----------- ");
+            _logger.LogDebug("-----------> LOG DEBUG <-----------");
+            _logger.LogInformation("-----------> LOG INFORMATION <-----------");
+            _logger.LogWarning("-----------> LOG WARNING <-----------");
+            _logger.LogError("-----------> LOG ERROR <-----------");
+            _logger.LogCritical("-----------> LOG CRITICAL/FATAL <-----------");
+
             var fakeUsers = new List<Domain.Models.User>()
             {
                 new Domain.Models.User

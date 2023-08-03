@@ -6,8 +6,6 @@ namespace API.EndpointDefinitions
 {
     public class UserEndpointDefinitions : IEndpointDefinition
     {
-
-
         public string _endpointURL = "/user/";
         public void DefineEndpoints(WebApplication app)
         {
@@ -18,10 +16,13 @@ namespace API.EndpointDefinitions
             IUserRepository repo,
             ILogger<UserEndpointDefinitions> _logger)
         {
-            _logger.LogInformation("log information!!!!!!");
-            _logger.LogCritical("log Critical!!!!!!");
+            _logger.LogTrace("-----------> LOG TRACE <----------- ");
+            _logger.LogDebug("-----------> LOG DEBUG <-----------");
+            _logger.LogInformation("-----------> LOG INFORMATION <-----------");
+            _logger.LogWarning("-----------> LOG WARNING <-----------");
+            _logger.LogError("-----------> LOG ERROR <-----------");
+            _logger.LogCritical("-----------> LOG CRITICAL/FATAL <-----------");
 
-            // var allLogs = await repo.GetAllAsync();
             var fakeUsers = new List<Domain.Models.User>()
             {
                 new Domain.Models.User
@@ -45,7 +46,6 @@ namespace API.EndpointDefinitions
                     Lastname = "georgiou",
                     Email= "kwstas@gmail.com"
                 },
-
             };
 
             return fakeUsers;

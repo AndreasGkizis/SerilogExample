@@ -1,6 +1,5 @@
 ﻿using API.Helpers.EndpointDefinitionsHelpers;
 using RepositoryInterfaces.Interfaces;
-using Serilog;
 
 namespace API.EndpointDefinitions
 {
@@ -8,7 +7,6 @@ namespace API.EndpointDefinitions
     {
         private readonly string _endpointURL = "/actionlog/";
         private readonly ILogger<ActionLogEndpointDefinitions> _logger;
-        private readonly Serilog.ILogger _logger2;
 
         public void DefineEndpoints(WebApplication app)
         {
@@ -17,8 +15,7 @@ namespace API.EndpointDefinitions
 
         internal async Task<List<Domain.Models.ActionLog>> GetAllActions(IActionLogRepository repo)
         {
-            Log.Information("woow skata");
-            //var allLogs = await repo.GetAllAsync();
+            _logger.LogInformation("/actionlog/getall has been used {0}", "this is a test....");
             var fakeAllLogs = new List<Domain.Models.ActionLog>()
             {
                 new Domain.Models.ActionLog

@@ -1,7 +1,5 @@
 using API.Helpers.EndpointDefinitionsHelpers;
-using Domain.Models;
 using Infrastructure.DependencyResolver;
-using Serilog;
 
 #region Variables
 
@@ -28,18 +26,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddInfrastructure(builder.Configuration, mainDB);
-
-///mine
-///
-
-
 builder.Services.AddEndpointDefinitions(typeof(IEndpointDefinition));
-
-///mine end
-///
-
-
-//Log.Logger = logger;
 
 var app = builder.Build();
 
@@ -52,15 +39,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-/// mine
-/// 
-
 app.UseEndpointDefinitions();
-
-
-/// mine end
-/// 
-
 
 app.Run();
 

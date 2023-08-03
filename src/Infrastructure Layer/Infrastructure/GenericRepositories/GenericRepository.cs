@@ -1,11 +1,6 @@
 ﻿using Database;
 using Microsoft.EntityFrameworkCore;
 using RepositoryInterfaces.GenericInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.GenericRepositories
 {

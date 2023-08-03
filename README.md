@@ -3,7 +3,7 @@
 ---
 ## Summary
 On this branch I use Serilog in order to configure a logger which writes to the Debug,Console,file and Microsoft SQL Server.
-All the settings for the above are in the `appsettings.json` file and are retrieved from there. There are seperate files and tables created for every log level.
+All the settings for the above are in the `appsettings.json` file and are retrieved from there. There are separate files and tables created for every log level.
 ## How does it work ??
 
 Here is the logic flow of this branch and how to use it

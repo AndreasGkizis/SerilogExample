@@ -29,7 +29,7 @@ Since this is using the `appsettings.json` we can change levels on the go and wi
 To try this edit the `appsettings.json` and change this part for any of the loggers
 `"restrictedToMinimumLevel": "Information"`
 
-The list of available Serilog logging levels :
+Here is the list of available Serilog logging levels you can use:
 ```
 Verbose
 Debug

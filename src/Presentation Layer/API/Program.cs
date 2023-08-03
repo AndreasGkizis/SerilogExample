@@ -1,15 +1,11 @@
 using API.Helpers.EndpointDefinitionsHelpers;
-using Domain.Models;
 using Infrastructure.DependencyResolver;
-using Serilog;
 
 #region Variables
 
 // edit variables here to run under different configs
-// var mainDB = "localhost";
-// var logDB = "localhostLogging";
+
 var mainDB = "LinuxDockerLocalhostDB";
-var logDB = "LinuxDockerLocalhostLoggingDB";
 
 
 #endregion
@@ -17,7 +13,6 @@ var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .Build();
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,9 +38,6 @@ builder.Services.AddEndpointDefinitions(typeof(IEndpointDefinition));
 
 #endregion
 
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,6 +51,5 @@ app.UseHttpsRedirection();
 // perform the DefineEndpoints() for each class that implements IEndpointDefinition
 // which in turn does the MapGet, MapPost etc..
 app.UseEndpointDefinitions();
-
 
 app.Run();

@@ -1,16 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Logger;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Database.DependencyResolver;
 using RepositoryInterfaces.Interfaces;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
-using Serilog;
 
 namespace Infrastructure.DependencyResolver
 {
@@ -18,7 +12,7 @@ namespace Infrastructure.DependencyResolver
     {
         public static void AddInfrastructure(
             this IServiceCollection services,
-             IConfiguration configuration,
+            IConfiguration configuration,
             string DBconnectionStringName
             )
         {
@@ -31,10 +25,7 @@ namespace Infrastructure.DependencyResolver
 
             )
         {
-            
             builder.AddLoggerConfiguration();
-            // adds Serilog to the request pipeline 
-            builder.Host.UseSerilog();
         }
     }
 }

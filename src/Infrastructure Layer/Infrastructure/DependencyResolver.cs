@@ -4,6 +4,8 @@ using Logger;
 using Database.DependencyResolver;
 using Microsoft.AspNetCore.Builder;
 using Serilog;
+using RepositoryInterfaces.Interfaces;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.DependencyResolver
 {
@@ -15,7 +17,7 @@ namespace Infrastructure.DependencyResolver
             string connectionStringName)
         {
             services.AddDatabaseContext(configuration, connectionStringName);
-            //services.AddTransient<IActionLogRepository, ActionLogRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         public static void AddLoggerConfig(this WebApplicationBuilder builder)
